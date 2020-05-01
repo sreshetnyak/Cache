@@ -14,6 +14,15 @@ public class SyncStorage<T> {
 }
 
 extension SyncStorage: StorageAware {
+  
+  public func url(forKey key: String) throws -> URL {
+    var url: URL!
+    try serialQueue.sync {
+      url = try innerStorage.url(forKey: key)
+    }
+    return url
+  }
+  
   public func entry(forKey key: String) throws -> Entry<T> {
     var entry: Entry<T>!
     try serialQueue.sync {

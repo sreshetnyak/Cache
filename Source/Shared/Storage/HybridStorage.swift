@@ -26,6 +26,15 @@ public final class HybridStorage<T> {
 }
 
 extension HybridStorage: StorageAware {
+  
+  public func url(forKey key: String) throws -> URL {
+    do {
+      return try memoryStorage.url(forKey: key)
+    } catch {
+      return try diskStorage.url(forKey: key)
+    }
+  }
+  
   public func entry(forKey key: String) throws -> Entry<T> {
     do {
       return try memoryStorage.entry(forKey: key)

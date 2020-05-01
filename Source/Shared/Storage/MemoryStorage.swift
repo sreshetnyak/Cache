@@ -1,6 +1,7 @@
 import Foundation
 
 public class MemoryStorage<T>: StorageAware {
+  
   fileprivate let cache = NSCache<NSString, MemoryCapsule>()
   // Memory cache keys
   fileprivate var keys = Set<String>()
@@ -44,6 +45,10 @@ extension MemoryStorage {
     keys.remove(key)
   }
 
+  public func url(forKey key: String) throws -> URL {
+    throw StorageError.notFound
+  }
+  
   public func entry(forKey key: String) throws -> Entry<T> {
     guard let capsule = cache.object(forKey: NSString(string: key)) else {
       throw StorageError.notFound

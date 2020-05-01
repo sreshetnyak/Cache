@@ -57,6 +57,16 @@ final public class DiskStorage<T> {
 }
 
 extension DiskStorage: StorageAware {
+  
+  public func url(forKey key: String) throws -> URL {
+    let filePath = makeFilePath(for: key)
+    if fileManager.fileExists(atPath: filePath) {
+      return URL(fileURLWithPath: filePath)
+    } else {
+      throw StorageError.notFound
+    }
+  }
+  
   public func entry(forKey key: String) throws -> Entry<T> {
     let filePath = makeFilePath(for: key)
     let data = try Data(contentsOf: URL(fileURLWithPath: filePath))

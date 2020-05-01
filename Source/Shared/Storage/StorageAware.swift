@@ -3,6 +3,14 @@ import Foundation
 /// A protocol used for saving and loading from storage
 public protocol StorageAware {
   associatedtype T
+  
+  /**
+   Tries to retrieve the object from the storage.
+   - Parameter key: Unique key to identify the object in the cache
+   - Returns: url object or nil if not found
+   */
+  func url(forKey key: String) throws -> URL
+  
   /**
    Tries to retrieve the object from the storage.
    - Parameter key: Unique key to identify the object in the cache
