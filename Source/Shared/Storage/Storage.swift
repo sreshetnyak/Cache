@@ -43,6 +43,11 @@ public final class Storage<T> {
 }
 
 extension Storage: StorageAware {
+  
+  public func url(forKey key: String) throws -> URL {
+    return try self.syncStorage.url(forKey: key)
+  }
+  
   public func entry(forKey key: String) throws -> Entry<T> {
     return try self.syncStorage.entry(forKey: key)
   }
