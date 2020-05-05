@@ -15,6 +15,14 @@ public class SyncStorage<T> {
 
 extension SyncStorage: StorageAware {
   
+  public func totalSize() throws -> UInt64 {
+    var size: UInt64!
+    try serialQueue.sync {
+      size = try innerStorage.totalSize()
+    }
+    return size
+  }
+  
   public func url(forKey key: String) throws -> URL {
     var url: URL!
     try serialQueue.sync {

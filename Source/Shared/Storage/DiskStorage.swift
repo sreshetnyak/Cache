@@ -192,7 +192,7 @@ extension DiskStorage {
   }
 
   /// Calculates total disk cache size.
-  func totalSize() throws -> UInt64 {
+  public func totalSize() throws -> UInt64 {
     var size: UInt64 = 0
     let contents = try fileManager.contentsOfDirectory(atPath: path)
     for pathComponent in contents {

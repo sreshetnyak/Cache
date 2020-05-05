@@ -16,6 +16,11 @@ public class MemoryStorage<T>: StorageAware {
 }
 
 extension MemoryStorage {
+  
+  public func totalSize() throws -> UInt64 {
+    return 0
+  }
+  
   public func setObject(_ object: T, forKey key: String, expiry: Expiry? = nil) {
     let capsule = MemoryCapsule(value: object, expiry: .date(expiry?.date ?? config.expiry.date))
     cache.setObject(capsule, forKey: NSString(string: key))

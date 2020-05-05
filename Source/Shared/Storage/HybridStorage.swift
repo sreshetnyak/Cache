@@ -27,6 +27,14 @@ public final class HybridStorage<T> {
 
 extension HybridStorage: StorageAware {
   
+  public func totalSize() throws -> UInt64 {
+    do {
+      return try diskStorage.totalSize()
+    } catch {
+      return try memoryStorage.totalSize()
+    }
+  }
+  
   public func url(forKey key: String) throws -> URL {
     do {
       return try memoryStorage.url(forKey: key)
