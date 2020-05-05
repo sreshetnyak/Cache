@@ -4,6 +4,8 @@ import Foundation
 public protocol StorageAware {
   associatedtype T
   
+  func totalSize() throws -> UInt64
+  
   /**
    Tries to retrieve the object from the storage.
    - Parameter key: Unique key to identify the object in the cache

@@ -44,6 +44,10 @@ public final class Storage<T> {
 
 extension Storage: StorageAware {
   
+  public func totalSize() throws -> UInt64 {
+    return try self.syncStorage.totalSize()
+  }
+  
   public func url(forKey key: String) throws -> URL {
     return try self.syncStorage.url(forKey: key)
   }
